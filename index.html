@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #Student{
+            display: grid;
+        gap: 20px;
+        width: 200px;
+        margin: auto;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 20px 20px;
+}
+
+h1{
+ text-align: center;
+}
+#navbar{
+        margin: auto;
+        height: 80px;
+        width: 100%;
+        background-color: black;
+        color: aliceblue;
+
+      }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <p>Ft-web17</p>
+        <button>
+            <a href="dashboard.html">Dashboard</a>
+        </button>
+    </div>
+    
+  
+        <h1>Add Students Data</h1>
+        <form id="Student" onsubmit="storeData(event)"> 
+           <input type="text" id="name" placeholder="Name">
+           <input type="text" id="course" placeholder="course">
+           <input tye="number" id="unit" placeholder="unit">
+           <input type="text" id="image" placeholder="Image">
+         
+           
+        
+           <input type="number" id="batch" placeholder="Ft_web batch No.">
+           
+           <input type="submit">
+   </form>
+
+   
+</body>
+</html>
+<script>
+
+
+function Data(n,c,u,i,b){
+    this.name=n;
+ 
+   
+    this.course=c;
+     this.unit=u;
+    this.image=i;
+    this.batch=`Ft-web${b}`;
+}
+
+function calculate(){
+    let data=JSON.parse(localStorage.getItem("students"))||[];
+
+ let obj={};
+
+ for(var i=0;i<data.length;i++){
+    if(!obj[data[i].batch]){
+        obj[data[i].batch]=1
+    }
+}
+    for(var i=0;i<data.length;i++){
+  
+        obj[data[i].batch]++
+    }
+    console.log(obj)
+ }
+
+calculate();
+
+
+
+
+
+    function storeData(e){
+        e.preventDefault();
+        let form=document.getElementById("Student");
+        let name=form.name.value;
+
+        let course=form.course.value;
+        let unit=form.unit.value;
+        let image=form.image.value;
+        let batch=form.batch.value;
+
+         console.log(name,course,unit,image,batch)
+     let S1=new Data(name,course,unit,image,batch)
+    
+     let data=JSON.parse(localStorage.getItem("studentData"))||[];
+     data.push(S1);
+
+     localStorage.setItem("studentData",JSON.stringify(data))
+     console.log(S1)
+    
+    
+    
+    
+    
+    }
+
+
+
+</script>

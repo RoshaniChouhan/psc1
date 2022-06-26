@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img{
+            height: 300px;
+            width: 150px
+        }
+        #cont{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(auto);
+        gap: 20px;
+        margin-top: 10px;
+        padding: 30px;
+        text-align: center;
+        height: 400px;
+      }
+      #navbar{
+        margin: auto;
+        height: 80px;
+        width: 100%;
+        background-color: black;
+        color: aliceblue;
+
+      }
+    
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <p>Ft-web17</p>
+    </div>
+    <div id="cont">
+
+    </div>
+</body>
+</html>
+<script>
+function append(){
+    let data=JSON.parse(localStorage.getItem("studentData"))||[];
+let cont=document.getElementById("cont")
+
+    data.forEach(function(el,index){
+    
+    
+        let div=document.createElement("div");
+
+    
+        let name=document.createElement("p");
+    name.innerText=el.name;
+    
+
+    let course=document.createElement("p");
+    course.innerText=el.course;
+
+        
+    let unit=document.createElement("p");
+    unit.innerText=el.unit;
+    let image=document.createElement("img");
+    image.src=el.image;
+    image.setAttribute("class","img")
+    let batch=document.createElement("p");
+batch.innerText=el.batch;
+
+let btn=document.createElement("button");
+btn.innerText="Remove "
+btn.setAttribute("id","remove")
+btn.addEventListener("click",function(){
+    removeProduct(el,index)
+})
+div.append(name,course,unit,image,batch,btn)
+
+cont.append(div);
+
+
+})
+   
+function removeProduct(el,index){
+    data.splice(index,1)
+    console.log(data)
+
+    localStorage.setItem("studentData",JSON.stringify(data))
+
+    window.location.reload()
+}
+
+
+
+}
+append();
+
+
+</script>
